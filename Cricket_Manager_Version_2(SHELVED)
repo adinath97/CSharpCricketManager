@@ -1,0 +1,1673 @@
+using System;
+using System.Collections.Generic;
+
+namespace newapp
+{
+    class Program
+    {
+      public static List<string> India = new List<string>
+        { "Virat Kohli", "Rohit Sharma", "Saurav Ganguly", "Rahul Dravid",
+            "Sachin Tendulkar", "VVS Laxman", "MS Dhoni", "Irfan Pathan",
+        "Zaheer Khan", "Ravichandran Ashwin", "Ishant Sharma"};
+        public static List<string> Australia = new List<string> {"David Warner", "Steven Smith",
+        "Michael Clarke", "Shaun Marsh", "Ricky Ponting", "Adam Gilchrist",
+        "Glen Maxwell", "Mitchell Starc", "Josh Hazelwood", "Nathan Lyon", "James Pattinson"};
+
+        //India Records
+        public static List<string> Batting_Scorecard_1_Names = new List<string>();
+        public static List<int> Batting_Scorecard_1_Runs = new List<int>();
+        public static List<int> Batting_Scorecard_1_Balls = new List<int>();
+
+        //Aussie Records
+        public static List<string> Batting_Scorecard_2_Names = new List<string>();
+        public static List<int> Batting_Scorecard_2_Runs = new List<int>();
+        public static List<int> Batting_Scorecard_2_Balls = new List<int>();
+        public static string batting_intensity1;
+        public static string batting_intensity2;
+        public static bool over_COMPLETE;
+        public static int overs_total;
+        public static int shot;
+        public static int del1;
+        public static int del2;
+        public static int del3;
+        public static int del4;
+        public static int del5;
+        public static int first_Innings_total;
+
+        //India
+        public static int Virat_Kohli_Score;
+        public static int Virat_Kohli_DelPlayed;
+        public static int Rohit_Sharma_Score;
+        public static int Rohit_Sharma_DelPlayed;
+        public static int Saurav_Ganguly_Score;
+        public static int Saurav_Ganguly_DelPlayed;
+        public static int Rahul_Dravid_Score;
+        public static int Rahul_Dravid_DelPlayed;
+        public static int Sachin_Tend_Score;
+        public static int Sachin_Tend_DelPlayed;
+        public static int VVS_Laxman_Score;
+        public static int VVS_Laxman_DelPlayed;
+        public static int MS_Dhoni_Score;
+        public static int MS_Dhoni_DelPlayed;
+        public static int Irfan_Pathan_Score;
+        public static int Irfan_Pathan_DelPlayed;
+        public static int Zaheer_Khan_Score;
+        public static int Zaheer_Khan_DelPlayed;
+        public static int Ishant_Sharma_Score;
+        public static int Ishant_Sharma_DelPlayed;
+        public static int Ravichandran_Ashwin_Score;
+        public static int Ravichandran_Ashwin_DelPlayed;
+
+        //Aussie
+        public static int David_Warner_score;
+        public static int David_Warner_DelPlayed;
+        public static int Steven_Smith_score;
+        public static int Steven_Smith_DelPlayed;
+        public static int Michael_Clarke_score;
+        public static int Michael_Clarke_DelPlayed;
+        public static int Shaun_Marsh_score;
+        public static int Shaun_Marsh_DelPlayed;
+        public static int Ricky_Ponting_score;
+        public static int Ricky_Ponting_DelPlayed;
+        public static int Adam_Gilchrist_score;
+        public static int Adam_Gilchrist_DelPlayed;
+        public static int Glen_Maxwell_score;
+        public static int Glen_Maxwell_DelPlayed;
+        public static int Mitchell_Starc_score;
+        public static int Mitchell_Starc_DelPlayed;
+        public static int Josh_Hazelwood_score;
+        public static int Josh_Hazelwood_DelPlayed;
+        public static int Nathan_Lyon_score;
+        public static int Nathan_Lyon_DelPlayed;
+        public static int James_Pattinson_score;
+        public static int James_Pattinson_DelPlayed;
+        public static string team1 = "India";
+        public static string team2 = "Australia";
+
+        public static List<int> Top_PossibleShots_LOW = new List<int> { 0, 1, 2, 3, 4, 6 };
+        public static List<int> Middle_PossibleShots_LOW = new List<int> { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 6 };
+        public static List<int> Bottom_PossibleShots_LOW = new List<int> { 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 3, 3, 4, 6 };
+        public static List<int> Top_PossibleShots_MED = new List<int> { 0, 1, 2, 3, 3, 3, 4, 4, 4, 4, 6, 6, 6, 6, 7, 7};
+        public static List<int> Middle_PossibleShots_MED = new List<int> { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 4, 4, 6, 6, 6, 6, 7, 7 };
+        public static List<int> Bottom_PossibleShots_MED = new List<int> { 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 3, 3, 4, 4, 4, 6, 6, 7, 7, 7, 7};
+        public static List<int> Top_PossibleShots_HIGH = new List<int> { 0, 1, 2, 3, 4, 4, 4, 4, 4, 4, 4, 4, 6, 6, 6, 6, 6, 6, 6, 6, 6, 7, 7, 7};
+        public static List<int> Middle_PossibleShots_HIGH = new List<int> { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 4, 4, 4, 4, 6, 6, 6, 6, 6, 6, 7, 7, 7 };
+        public static List<int> Bottom_PossibleShots_HIGH = new List<int> { 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 3, 3, 4, 4, 4, 4, 4, 6, 6, 6, 7, 7, 7, 7, 7, 7 };
+        public static string bowler1;
+        public static string bowler2;
+        public static string bowler3;
+        public static string bowler4;
+        public static string bowler5;
+
+        public static string batsman1;
+        public static string batsman2;
+        public static int batsman_1_Score;
+        public static int batsman_2_Score;
+        public static int balls1;
+        public static int balls2;
+        public static int wickets_Lost;
+        public static int delivery;
+
+        public static string currentBatsman;
+        public static string currentBowler;
+
+        public static bool On_strike_Batsman_out;
+        public static bool Innings_Complete;
+        public static bool batsman_1_Out;
+        public static bool batsman_2_Out;
+        public static bool last_Ball_Wicket;
+
+        public static int innings_total;
+        public static int deliveries_total;
+        public static bool swap = false;
+
+        //bowling
+        public static int bowler1_balls;
+        public static int bowler2_balls;
+        public static int bowler3_balls;
+        public static int bowler4_balls;
+        public static int bowler5_balls;
+
+        public static int bowler1_overs;
+        public static int bowler2_overs;
+        public static int bowler3_overs;
+        public static int bowler4_overs;
+        public static int bowler5_overs;
+
+        public static int bowler1_runs;
+        public static int bowler2_runs;
+        public static int bowler3_runs;
+        public static int bowler4_runs;
+        public static int bowler5_runs;
+
+        public static int bowler1_wickets;
+        public static int bowler2_wickets;
+        public static int bowler3_wickets;
+        public static int bowler4_wickets;
+        public static int bowler5_wickets;
+        public static bool bowler1_OVER_DONE;
+        public static bool bowler2_OVER_DONE;
+        public static bool bowler3_OVER_DONE;
+        public static bool bowler4_OVER_DONE;
+        public static bool bowler5_OVER_DONE;
+        public static bool bowler1_BOWLED_OUT;
+        public static bool bowler2_BOWLED_OUT;
+        public static bool bowler3_BOWLED_OUT;
+        public static bool bowler4_BOWLED_OUT;
+        public static bool bowler5_BOWLED_OUT;
+
+        public static void Main(string[] args)
+        {
+            IndiaBats();
+
+            wickets_Lost = 0;
+            overs_total = 0;
+            shot = 0;
+            del1 = 0;
+            del2 = 0;
+            del3 = 0;
+            del4 = 0;
+            del5 = 0;
+            On_strike_Batsman_out = false;
+            Innings_Complete = false;
+            batsman_1_Out = false;
+            batsman_2_Out = false;
+            last_Ball_Wicket = false;
+
+            innings_total = 0;
+            deliveries_total = 0;
+            swap = false;
+
+            //bowling
+            bowler1_balls = 0;
+            bowler2_balls = 0;
+            bowler3_balls = 0;
+            bowler4_balls = 0;
+            bowler5_balls = 0;
+
+            bowler1_overs = 0;
+            bowler2_overs = 0;
+            bowler3_overs = 0;
+            bowler4_overs = 0;
+            bowler5_overs = 0;
+
+            bowler1_runs = 0;
+            bowler2_runs = 0;
+            bowler3_runs = 0;
+            bowler4_runs = 0;
+            bowler5_runs = 0;
+
+            bowler1_wickets = 0;
+            bowler2_wickets = 0;
+            bowler3_wickets = 0;
+            bowler4_wickets = 0;
+            bowler5_wickets = 0;
+
+            bowler1_OVER_DONE = false;
+            bowler2_OVER_DONE = false;
+            bowler3_OVER_DONE = false;
+            bowler4_OVER_DONE = false;
+            bowler5_OVER_DONE = false;
+
+            bowler1_BOWLED_OUT = false;
+            bowler2_BOWLED_OUT = false;
+            bowler3_BOWLED_OUT = false;
+            bowler4_BOWLED_OUT = false;
+            bowler5_BOWLED_OUT = false;
+
+            batsman_1_Score = 0;
+            batsman_2_Score = 0;
+            balls1 = 0;
+            balls2 = 0;
+
+            //AustraliaBats();
+        }
+        public static void IndiaBats()
+        {
+            Console.WriteLine("      ");
+            Console.WriteLine("India will bat, and Australia will bowl");
+            Console.WriteLine("      ");
+            Batting_Scorecard_1_Names = India;
+
+            bowler1 = Australia[10];
+            bowler2 = Australia[9];
+            bowler3 = Australia[8];
+            bowler4 = Australia[7];
+            bowler5 = Australia[6];
+            currentBowler = bowler1;
+            
+            Random int1 = new Random();
+            del1 = int1.Next(6,10);
+
+            Random int2 = new Random();
+            del2 = int1.Next(6,10);
+
+            Random int3 = new Random();
+            del3 = int1.Next(6,10);
+
+            Random int4 = new Random();
+            del4 = int1.Next(6,15);
+
+            Random int5 = new Random();
+            del5 = int1.Next(6,20);
+
+            batsman1 = India[0];
+            batsman2 = India[1];
+            currentBatsman = batsman1;
+            Innings_Complete = false;
+            On_strike_Batsman_out = false;
+            over_COMPLETE = false;
+
+            //Console.WriteLine("HI THERE!");
+            
+            while (Innings_Complete == false)
+            {
+                //Console.WriteLine("HELLO THERE!");
+                Console.WriteLine("Please enter batting intensities: L = 'low', M = 'medium', H = 'high'" );
+
+                Console.WriteLine("     ");
+
+                Console.Write(batsman1 + " : ");
+                batting_intensity1 = Console.ReadLine();
+
+                Console.WriteLine("     ");
+
+                Console.Write(batsman2 + " : ");
+                batting_intensity2 = Console.ReadLine();
+                
+                Console.WriteLine("     ");
+
+                while (On_strike_Batsman_out == false && overs_total < 20 && over_COMPLETE == false)
+                {
+                    if(currentBatsman == batsman1) {
+                        if(batting_intensity1 == "L") {
+                            if(currentBatsman == India[0] || currentBatsman == India[1] || currentBatsman == India[2]) {
+                            //Console.WriteLine("TOP ORDER!");
+                            Random hit1 = new Random();
+                            int shot1 = hit1.Next(0, Top_PossibleShots_LOW.Count);
+                            shot = Top_PossibleShots_LOW[shot1];
+                        }
+
+                            if(currentBatsman == India[3] || currentBatsman == India[4] || currentBatsman == India[5] || currentBatsman == India[6]) {
+                            //Console.WriteLine("MIDDLE ORDER!");
+                            Random hit1 = new Random();
+                            int shot1 = hit1.Next(0, Middle_PossibleShots_LOW.Count);
+                            shot = Middle_PossibleShots_LOW[shot1];
+                        }
+                        
+                            if(currentBatsman == India[7] || currentBatsman == India[8] || currentBatsman == India[9] || currentBatsman == India[10]) {
+                            //Console.WriteLine("LOWER ORDER!");
+                            Random hit1 = new Random();
+                            int shot1 = hit1.Next(0, Bottom_PossibleShots_LOW.Count);
+                            shot = Bottom_PossibleShots_LOW[shot1];
+                            }
+                        }
+                        if(batting_intensity1 == "M") {
+                            if(currentBatsman == India[0] || currentBatsman == India[1] || currentBatsman == India[2]) {
+                            //Console.WriteLine("TOP ORDER!");
+                            Random hit1 = new Random();
+                            int shot1 = hit1.Next(0, Top_PossibleShots_MED.Count);
+                            shot = Top_PossibleShots_MED[shot1];
+                        }
+
+                            if(currentBatsman == India[3] || currentBatsman == India[4] || currentBatsman == India[5] || currentBatsman == India[6]) {
+                            //Console.WriteLine("MIDDLE ORDER!");
+                            Random hit1 = new Random();
+                            int shot1 = hit1.Next(0, Middle_PossibleShots_MED.Count);
+                            shot = Middle_PossibleShots_MED[shot1];
+                        }
+                        
+                            if(currentBatsman == India[7] || currentBatsman == India[8] || currentBatsman == India[9] || currentBatsman == India[10]) {
+                            //Console.WriteLine("LOWER ORDER!");
+                            Random hit1 = new Random();
+                            int shot1 = hit1.Next(0, Bottom_PossibleShots_MED.Count);
+                            shot = Bottom_PossibleShots_MED[shot1];
+                        }
+                        }
+                        if(batting_intensity1 == "H") {
+                            if(currentBatsman == India[0] || currentBatsman == India[1] || currentBatsman == India[2]) {
+                            //Console.WriteLine("TOP ORDER!");
+                            Random hit1 = new Random();
+                            int shot1 = hit1.Next(0, Top_PossibleShots_HIGH.Count);
+                            shot = Top_PossibleShots_HIGH[shot1];
+                        }
+
+                            if(currentBatsman == India[3] || currentBatsman == India[4] || currentBatsman == India[5] || currentBatsman == India[6]) {
+                            //Console.WriteLine("MIDDLE ORDER!");
+                            Random hit1 = new Random();
+                            int shot1 = hit1.Next(0, Middle_PossibleShots_HIGH.Count);
+                            shot = Middle_PossibleShots_HIGH[shot1];
+                        }
+                        
+                            if(currentBatsman == India[7] || currentBatsman == India[8] || currentBatsman == India[9] || currentBatsman == India[10]) {
+                            //Console.WriteLine("LOWER ORDER!");
+                            Random hit1 = new Random();
+                            int shot1 = hit1.Next(0, Bottom_PossibleShots_HIGH.Count);
+                            shot = Bottom_PossibleShots_HIGH[shot1];
+                        }
+                        }
+                    }
+                    else if(currentBatsman == batsman2) {
+                        if(batting_intensity2 == "L") {
+                            if(currentBatsman == India[0] || currentBatsman == India[1] || currentBatsman == India[2]) {
+                            //Console.WriteLine("TOP ORDER!");
+                            Random hit1 = new Random();
+                            int shot1 = hit1.Next(0, Top_PossibleShots_LOW.Count);
+                            shot = Top_PossibleShots_LOW[shot1];
+                        }
+
+                            if(currentBatsman == India[3] || currentBatsman == India[4] || currentBatsman == India[5] || currentBatsman == India[6]) {
+                            //Console.WriteLine("MIDDLE ORDER!");
+                            Random hit1 = new Random();
+                            int shot1 = hit1.Next(0, Middle_PossibleShots_LOW.Count);
+                            shot = Middle_PossibleShots_LOW[shot1];
+                        }
+                        
+                            if(currentBatsman == India[7] || currentBatsman == India[8] || currentBatsman == India[9] || currentBatsman == India[10]) {
+                            //Console.WriteLine("LOWER ORDER!");
+                            Random hit1 = new Random();
+                            int shot1 = hit1.Next(0, Bottom_PossibleShots_LOW.Count);
+                            shot = Bottom_PossibleShots_LOW[shot1];
+                            }
+                        }
+                        if(batting_intensity2 == "M") {
+                            if(currentBatsman == India[0] || currentBatsman == India[1] || currentBatsman == India[2]) {
+                            //Console.WriteLine("TOP ORDER!");
+                            Random hit1 = new Random();
+                            int shot1 = hit1.Next(0, Top_PossibleShots_MED.Count);
+                            shot = Top_PossibleShots_MED[shot1];
+                        }
+
+                            if(currentBatsman == India[3] || currentBatsman == India[4] || currentBatsman == India[5] || currentBatsman == India[6]) {
+                            //Console.WriteLine("MIDDLE ORDER!");
+                            Random hit1 = new Random();
+                            int shot1 = hit1.Next(0, Middle_PossibleShots_MED.Count);
+                            shot = Middle_PossibleShots_MED[shot1];
+                        }
+                        
+                            if(currentBatsman == India[7] || currentBatsman == India[8] || currentBatsman == India[9] || currentBatsman == India[10]) {
+                            //Console.WriteLine("LOWER ORDER!");
+                            Random hit1 = new Random();
+                            int shot1 = hit1.Next(0, Bottom_PossibleShots_MED.Count);
+                            shot = Bottom_PossibleShots_MED[shot1];
+                        }
+                        }
+                        if(batting_intensity2 == "H") {
+                            if(currentBatsman == India[0] || currentBatsman == India[1] || currentBatsman == India[2]) {
+                            //Console.WriteLine("TOP ORDER!");
+                            Random hit1 = new Random();
+                            int shot1 = hit1.Next(0, Top_PossibleShots_HIGH.Count);
+                            shot = Top_PossibleShots_HIGH[shot1];
+                        }
+
+                            if(currentBatsman == India[3] || currentBatsman == India[4] || currentBatsman == India[5] || currentBatsman == India[6]) {
+                            //Console.WriteLine("MIDDLE ORDER!");
+                            Random hit1 = new Random();
+                            int shot1 = hit1.Next(0, Middle_PossibleShots_HIGH.Count);
+                            shot = Middle_PossibleShots_HIGH[shot1];
+                        }
+                        
+                            if(currentBatsman == India[7] || currentBatsman == India[8] || currentBatsman == India[9] || currentBatsman == India[10]) {
+                            //Console.WriteLine("LOWER ORDER!");
+                            Random hit1 = new Random();
+                            int shot1 = hit1.Next(0, Bottom_PossibleShots_HIGH.Count);
+                            shot = Bottom_PossibleShots_HIGH[shot1];
+                        }
+                        }
+                    }
+                    
+                    if(bowler1_balls < 6 /*&& bowler1_OVER_DONE == false*/) {
+                        //Console.WriteLine("BOWLER 1!!!");
+                        currentBowler = bowler1;
+                    }
+                    else if(bowler2_balls < 6 /*&& bowler2_OVER_DONE == false*/) {
+                        //Console.WriteLine("BOWLER 2!!!");
+                        currentBowler = bowler2;
+                    }
+                    else if(bowler3_balls < 6 /*&& bowler3_OVER_DONE == false*/) {
+                        //Console.WriteLine("BOWLER 3!!!");
+                        currentBowler = bowler3;
+                    }
+                    else if(bowler4_balls < 6 /*&& bowler4_OVER_DONE == false*/) {
+                        //Console.WriteLine("BOWLER 4!!!");
+                        currentBowler = bowler4;
+                    }
+                    else if(bowler5_balls < 6 /*&& bowler5_OVER_DONE == false*/) {
+                        //Console.WriteLine("BOWLER 5!!!");
+                        currentBowler = bowler5;
+                    }
+                    
+                    if(currentBowler == bowler1 /*&& bowler1_OVER_DONE == false*/) {
+                        //Console.WriteLine("BOWLER 1 DEL");
+                        Random ball1 = new Random();
+                        int delivery1 = ball1.Next(0, del1);
+                        delivery = delivery1;
+                    }
+                    else if(currentBowler == bowler2 /*&& bowler2_OVER_DONE == false*/) {
+                        //Console.WriteLine("BOWLER 2 DEL");
+                        Random ball1 = new Random();
+                        int delivery1 = ball1.Next(0, del2);
+                        delivery = delivery1;
+                    }
+                    else if(currentBowler == bowler3 /*&& bowler3_OVER_DONE == false*/) {
+                        //Console.WriteLine("BOWLER 3 DEL");
+                        Random ball1 = new Random();
+                        int delivery1 = ball1.Next(0, del3);
+                        delivery = delivery1;
+                    }
+                    else if(currentBowler == bowler4 /*&& bowler4_OVER_DONE == false*/) {
+                        //Console.WriteLine("BOWLER 4 DEL");
+                        Random ball1 = new Random();
+                        int delivery1 = ball1.Next(0, del4);
+                        delivery = delivery1;
+                    }
+                    else if(currentBowler == bowler5 /*&& bowler5_OVER_DONE == false*/) {
+                        //Console.WriteLine("BOWLER 5 DEL");
+                        Random ball1 = new Random();
+                        int delivery1 = ball1.Next(0, del5);
+                        delivery = delivery1;
+                    }
+                    
+                    if (!(shot == delivery))
+                    {
+                        deliveries_total++;
+                        if (shot == 1 || shot == 3)
+                        {
+                            if (currentBatsman == batsman1)
+                            {
+                                int balls4 = deliveries_total % 6;
+                                int overs4 = deliveries_total / 6;
+                                Console.WriteLine(overs4 + "." + balls4 + " : " + currentBatsman + " scored " + shot);
+                                batsman_1_Score += shot;
+                                balls1++;
+                                currentBatsman = batsman2;
+                                swap = true;
+
+                            }
+                            else if (currentBatsman == batsman2 && swap == false)
+                            {
+                                int balls4 = deliveries_total % 6;
+                                int overs4 = deliveries_total / 6;
+                                Console.WriteLine(overs4 + "." + balls4 + " : " + currentBatsman + " scored " + shot);
+                                batsman_2_Score += shot;
+                                balls2++;
+                                currentBatsman = batsman1;
+                            }
+                            swap = false;
+                        }
+                        else if(shot == 7) {
+                            //Console.WriteLine("GONE FOR 7!");
+                            if (currentBatsman == batsman1)
+                            {
+                                balls1++;
+                                //Batting_Scorecard_1_Names.Add(currentBatsman);
+                                //Batting_Scorecard_1_Runs.Add(batsman_1_Score);
+                                //Batting_Scorecard_1_Balls.Add(balls1);
+                                if(currentBatsman == "Virat Kohli") {
+                                    Virat_Kohli_Score = batsman_1_Score;
+                                    Virat_Kohli_DelPlayed = balls1;
+                                }
+                                else if(currentBatsman == "Rohit Sharma") {
+                                    Rohit_Sharma_Score = batsman_1_Score;
+                                    Rohit_Sharma_DelPlayed = balls1;
+                                }
+                                else if(currentBatsman == "Rahul Dravid") {
+                                    Rahul_Dravid_Score = batsman_1_Score;
+                                    Rahul_Dravid_DelPlayed = balls1;
+                                }
+                                else if(currentBatsman == "Sachin Tendulkar") {
+                                    Sachin_Tend_Score = batsman_1_Score;
+                                    Sachin_Tend_DelPlayed = balls1;
+                                }
+                                else if(currentBatsman == "Saurav Ganguly") {
+                                    Saurav_Ganguly_Score = batsman_1_Score;
+                                    Saurav_Ganguly_DelPlayed = balls1;
+                                }
+                                else if(currentBatsman == "VVS Laxman") {
+                                    VVS_Laxman_Score = batsman_1_Score;
+                                    VVS_Laxman_DelPlayed = balls1;
+                                }
+                                else if(currentBatsman == "MS Dhoni") {
+                                    MS_Dhoni_Score = batsman_1_Score;
+                                    MS_Dhoni_DelPlayed = balls1;
+                                }
+                                else if(currentBatsman == "Irfan Pathan") {
+                                    Irfan_Pathan_Score = batsman_1_Score;
+                                    Irfan_Pathan_DelPlayed = balls1;
+                                }
+                                else if(currentBatsman == "Zaheer Khan") {
+                                    Zaheer_Khan_Score = batsman_1_Score;
+                                    Zaheer_Khan_DelPlayed = balls1;
+                                }
+                                else if(currentBatsman == "Ravichandran Ashwin") {
+                                    Ravichandran_Ashwin_Score = batsman_1_Score;
+                                    Ravichandran_Ashwin_DelPlayed = balls1;
+                                }
+                                else if(currentBatsman == "Ishant Sharma") {
+                                    Ishant_Sharma_Score = batsman_1_Score;
+                                    Ishant_Sharma_DelPlayed = balls1;
+                                }
+                                wickets_Lost++;
+                                
+                                Console.WriteLine(batsman1 + " OUT on " + batsman_1_Score
+                                + " ( " + balls1 + " )");
+
+                                batsman_1_Out = true;
+                                if(wickets_Lost < 10) {
+                                    balls1 = 0;
+                                    batsman_1_Score = 0;
+                                }
+                                
+                                if(deliveries_total % 6 == 0) {
+                                    last_Ball_Wicket = true;
+                                }
+                            }
+                            else if (currentBatsman == batsman2)
+                            {
+                                balls2++;
+                                //Batting_Scorecard_1_Names.Add(currentBatsman);
+                                //Batting_Scorecard_1_Runs.Add(batsman_2_Score);
+                                //Batting_Scorecard_1_Balls.Add(balls2);
+                                if(currentBatsman == "Virat Kohli") {
+                                    Virat_Kohli_Score = batsman_2_Score;
+                                    Virat_Kohli_DelPlayed = balls2;
+                                }
+                                else if(currentBatsman == "Rohit Sharma") {
+                                    Rohit_Sharma_Score = batsman_2_Score;
+                                    Rohit_Sharma_DelPlayed = balls2;
+                                }
+                                else if(currentBatsman == "Rahul Dravid") {
+                                    Rahul_Dravid_Score = batsman_2_Score;
+                                    Rahul_Dravid_DelPlayed = balls2;
+                                }
+                                else if(currentBatsman == "Sachin Tendulkar") {
+                                    Sachin_Tend_Score = batsman_2_Score;
+                                    Sachin_Tend_DelPlayed = balls2;
+                                }
+                                else if(currentBatsman == "Saurav Ganguly") {
+                                    Saurav_Ganguly_Score = batsman_2_Score;
+                                    Saurav_Ganguly_DelPlayed = balls2;
+                                }
+                                else if(currentBatsman == "VVS Laxman") {
+                                    VVS_Laxman_Score = batsman_2_Score;
+                                    VVS_Laxman_DelPlayed = balls2;
+                                }
+                                else if(currentBatsman == "MS Dhoni") {
+                                    MS_Dhoni_Score = batsman_2_Score;
+                                    MS_Dhoni_DelPlayed = balls2;
+                                }
+                                else if(currentBatsman == "Irfan Pathan") {
+                                    Irfan_Pathan_Score = batsman_2_Score;
+                                    Irfan_Pathan_DelPlayed = balls2;
+                                }
+                                else if(currentBatsman == "Zaheer Khan") {
+                                    Zaheer_Khan_Score = batsman_2_Score;
+                                    Zaheer_Khan_DelPlayed = balls2;
+                                }
+                                else if(currentBatsman == "Ravichandran Ashwin") {
+                                    Ravichandran_Ashwin_Score = batsman_2_Score;
+                                    Ravichandran_Ashwin_DelPlayed = balls2;
+                                }
+                                else if(currentBatsman == "Ishant Sharma") {
+                                    Ishant_Sharma_Score = batsman_2_Score;
+                                    Ishant_Sharma_DelPlayed = balls2;
+                                }
+                                wickets_Lost++;
+                                
+                                Console.WriteLine(batsman2 + " OUT on " + batsman_2_Score
+                                + " ( " + balls2 + " )");
+                                /*
+                                Console.WriteLine("--------");
+                                Console.WriteLine(currentBatsman + " is out on " + batsman_2_Score + " (" + balls2 + ")");
+                                Console.WriteLine(batsman1 + " is not out on " + batsman_1_Score + " (" + balls1 + ")");
+                                Console.WriteLine(team1 + " is " + innings_total + " / " + wickets_Lost + " in " + deliveries_total + " deliveries");
+                                Console.WriteLine("--------");
+                                */
+                                batsman_2_Out = true;
+                                if(wickets_Lost < 10) {
+                                    balls2 = 0;
+                                    batsman_2_Score = 0;
+                                }
+                                if(deliveries_total % 6 == 0) {
+                                    last_Ball_Wicket = true;
+                                }
+                            }
+                            On_strike_Batsman_out = true;
+                            if(deliveries_total % 6 == 0) {
+                                last_Ball_Wicket = true;
+                            }
+                        }
+                        else if(!(shot == 7) && !(shot == 1) && !(shot == 3))
+                        {
+                            if (currentBatsman == batsman1)
+                            {
+                                int balls4 = deliveries_total % 6;
+                                int overs4 = deliveries_total / 6;
+                                Console.WriteLine(overs4 + "." + balls4 + " : " + currentBatsman + " scored " + shot);
+                                batsman_1_Score += shot;
+                                balls1++;
+                            }
+                            if (currentBatsman == batsman2)
+                            {
+                                int balls4 = deliveries_total % 6;
+                                int overs4 = deliveries_total / 6;
+                                Console.WriteLine(overs4 + "." + balls4 + " : " + currentBatsman + " scored " + shot);
+                                batsman_2_Score += shot;
+                                balls2++;
+                            }
+                        }
+                        if(!(shot == 7)) {
+                            innings_total += shot;
+                        }
+                        Console.WriteLine(team1 + " : " + innings_total + " / " + wickets_Lost);
+                        Console.WriteLine("      ");
+                    }
+                    else if (shot == delivery)
+                    {
+                        deliveries_total++;
+                        if (currentBatsman == batsman1)
+                        {
+                            balls1++;
+                            //Batting_Scorecard_1_Names.Add(currentBatsman);
+                            //Batting_Scorecard_1_Runs.Add(batsman_1_Score);
+                            //Batting_Scorecard_1_Balls.Add(balls1);
+                            if(currentBatsman == "Virat Kohli") {
+                                Virat_Kohli_Score = batsman_1_Score;
+                                Virat_Kohli_DelPlayed = balls1;
+                            }
+                            else if(currentBatsman == "Rohit Sharma") {
+                                Rohit_Sharma_Score = batsman_1_Score;
+                                Rohit_Sharma_DelPlayed = balls1;
+                            }
+                            else if(currentBatsman == "Rahul Dravid") {
+                                Rahul_Dravid_Score = batsman_1_Score;
+                                Rahul_Dravid_DelPlayed = balls1;
+                            }
+                            else if(currentBatsman == "Sachin Tendulkar") {
+                                Sachin_Tend_Score = batsman_1_Score;
+                                Sachin_Tend_DelPlayed = balls1;
+                            }
+                            else if(currentBatsman == "Saurav Ganguly") {
+                                Saurav_Ganguly_Score = batsman_1_Score;
+                                Saurav_Ganguly_DelPlayed = balls1;
+                            }
+                            else if(currentBatsman == "VVS Laxman") {
+                                VVS_Laxman_Score = batsman_1_Score;
+                                VVS_Laxman_DelPlayed = balls1;
+                            }
+                            else if(currentBatsman == "MS Dhoni") {
+                                MS_Dhoni_Score = batsman_1_Score;
+                                MS_Dhoni_DelPlayed = balls1;
+                            }
+                            else if(currentBatsman == "Irfan Pathan") {
+                                Irfan_Pathan_Score = batsman_1_Score;
+                                Irfan_Pathan_DelPlayed = balls1;
+                            }
+                            else if(currentBatsman == "Zaheer Khan") {
+                                Zaheer_Khan_Score = batsman_1_Score;
+                                Zaheer_Khan_DelPlayed = balls1;
+                            }
+                            else if(currentBatsman == "Ravichandran Ashwin") {
+                                Ravichandran_Ashwin_Score = batsman_1_Score;
+                                Ravichandran_Ashwin_DelPlayed = balls1;
+                            }
+                            else if(currentBatsman == "Ishant Sharma") {
+                                Ishant_Sharma_Score = batsman_1_Score;
+                                Ishant_Sharma_DelPlayed = balls1;
+                            }
+                            wickets_Lost++;
+                            
+                            Console.WriteLine(batsman1 + " OUT on " + batsman_1_Score
+                                + " ( " + balls1 + " )");
+                            /*
+                            Console.WriteLine("--------");
+                            Console.WriteLine(currentBatsman + " is out on " + batsman_1_Score + " (" + balls1 + ")");
+                            Console.WriteLine(batsman2 + " is not out on " + batsman_2_Score + " (" + balls2 + ")");
+                            Console.WriteLine(team1 + " is " + innings_total + " / " + wickets_Lost + " in " + deliveries_total + " deliveries" );
+                            Console.WriteLine("--------");
+                            */
+                            batsman_1_Out = true;
+                            if(wickets_Lost < 10) {
+                                balls1 = 0;
+                                batsman_1_Score = 0;
+                            }
+                            
+                            if(deliveries_total % 6 == 0) {
+                                last_Ball_Wicket = true;
+                            }
+                        }
+                        else if (currentBatsman == batsman2)
+                        {
+                            balls2++;
+                            //Batting_Scorecard_1_Names.Add(currentBatsman);
+                            //Batting_Scorecard_1_Runs.Add(batsman_2_Score);
+                            //Batting_Scorecard_1_Balls.Add(balls2);
+                            if(currentBatsman == "Virat Kohli") {
+                                Virat_Kohli_Score = batsman_2_Score;
+                                Virat_Kohli_DelPlayed = balls2;
+                            }
+                            else if(currentBatsman == "Rohit Sharma") {
+                                Rohit_Sharma_Score = batsman_2_Score;
+                                Rohit_Sharma_DelPlayed = balls2;
+                            }
+                            else if(currentBatsman == "Rahul Dravid") {
+                                Rahul_Dravid_Score = batsman_2_Score;
+                                Rahul_Dravid_DelPlayed = balls2;
+                            }
+                            else if(currentBatsman == "Sachin Tendulkar") {
+                                Sachin_Tend_Score = batsman_2_Score;
+                                Sachin_Tend_DelPlayed = balls2;
+                            }
+                            else if(currentBatsman == "Saurav Ganguly") {
+                                Saurav_Ganguly_Score = batsman_2_Score;
+                                Saurav_Ganguly_DelPlayed = balls2;
+                            }
+                            else if(currentBatsman == "VVS Laxman") {
+                                VVS_Laxman_Score = batsman_2_Score;
+                                VVS_Laxman_DelPlayed = balls2;
+                            }
+                            else if(currentBatsman == "MS Dhoni") {
+                                MS_Dhoni_Score = batsman_2_Score;
+                                MS_Dhoni_DelPlayed = balls2;
+                            }
+                            else if(currentBatsman == "Irfan Pathan") {
+                                Irfan_Pathan_Score = batsman_2_Score;
+                                Irfan_Pathan_DelPlayed = balls2;
+                            }
+                            else if(currentBatsman == "Zaheer Khan") {
+                                Zaheer_Khan_Score = batsman_2_Score;
+                                Zaheer_Khan_DelPlayed = balls2;
+                            }
+                            else if(currentBatsman == "Ravichandran Ashwin") {
+                                Ravichandran_Ashwin_Score = batsman_2_Score;
+                                Ravichandran_Ashwin_DelPlayed = balls2;
+                            }
+                            else if(currentBatsman == "Ishant Sharma") {
+                                Ishant_Sharma_Score = batsman_2_Score;
+                                Ishant_Sharma_DelPlayed = balls2;
+                            }
+                            wickets_Lost++;
+                            
+                            Console.WriteLine(batsman2 + " OUT on " + batsman_2_Score
+                                + " ( " + balls2 + " )");
+                            /*
+                            Console.WriteLine("--------");
+                            Console.WriteLine(currentBatsman + " is out on " + batsman_2_Score + " (" + balls2 + ")");
+                            Console.WriteLine(batsman1 + " is not out on " + batsman_1_Score + " (" + balls1 + ")");
+                            Console.WriteLine(team1 + " is " + innings_total + " / " + wickets_Lost + " in " + deliveries_total + " deliveries");
+                            Console.WriteLine("--------");
+                            */
+                            batsman_2_Out = true;
+                            if(wickets_Lost < 10) {
+                                balls2 = 0;
+                                batsman_2_Score = 0;
+                            }
+                            if(deliveries_total % 6 == 0) {
+                                last_Ball_Wicket = true;
+                            }
+                        }
+                        Console.WriteLine(team1 + " : " + innings_total + " / " + wickets_Lost);
+                        Console.WriteLine("      ");
+                        On_strike_Batsman_out = true;
+                    }
+
+                    if(deliveries_total % 6 == 0) {
+                        Console.WriteLine(" ===============");
+                        over_COMPLETE = true;
+                        int balls3 = deliveries_total % 6;
+                        int overs3 = deliveries_total / 6;
+                        Console.WriteLine("       ");
+                        Console.WriteLine(team1 + " : " + innings_total + " / " + wickets_Lost 
+                        + " in " + overs3 + "." + balls3 + " overs.");
+                        Console.WriteLine("       ");
+                        Console.WriteLine(" ===============");
+                        
+                        bool keepGoing = false;
+                        if(currentBatsman == batsman1) {
+                            currentBatsman = batsman2;
+                            keepGoing = true; 
+                        }
+                        else if(currentBatsman == batsman2 && keepGoing == false) {
+                            currentBatsman = batsman1;
+                        }
+                        keepGoing = false;
+                    }
+                    
+                    if(currentBowler == bowler1) {
+                        bowler1_balls++;
+                        if(bowler1_balls == 6) {
+                            //bowler1_OVER_DONE = true;
+                            bowler1_overs++;
+                            overs_total++;
+                            bowler2_balls = 0;
+                            currentBowler = bowler2;
+                        }
+                    }
+                    else if(currentBowler == bowler2) {
+                        bowler2_balls++;
+                        if(bowler2_balls == 6) {
+                            //bowler2_OVER_DONE = true;
+                            bowler2_overs++;
+                            overs_total++;
+                            bowler3_balls = 0;
+                            currentBowler = bowler3;
+                        }
+                    }
+                    else if(currentBowler == bowler3) {
+                        bowler3_balls++;
+                        if(bowler3_balls == 6) {
+                            //bowler3_OVER_DONE = true;
+                            bowler3_overs++;
+                            overs_total++;
+                            bowler4_balls = 0;
+                            currentBowler = bowler4;
+                        }
+                    }
+                    else if(currentBowler == bowler4) {
+                        bowler4_balls++;
+                        if(bowler4_balls == 6) {
+                            //bowler4_OVER_DONE = true;
+                            bowler4_overs++;
+                            overs_total++;
+                            bowler5_balls = 0;
+                            currentBowler = bowler5;
+                        }
+                    }
+                    else if(currentBowler == bowler5) {
+                        bowler5_balls++;
+                        if(bowler5_balls == 6) {
+                            //bowler5_OVER_DONE = true;
+                            bowler5_overs++;
+                            overs_total++;
+                            currentBowler = bowler1;
+                            bowler1_balls = 0;
+                        }
+                    }
+                }
+                if (batsman_1_Out == true && wickets_Lost < 10 && last_Ball_Wicket == false)
+                {
+                    //Console.WriteLine("Batsman 1 OUT");
+                    batsman_1_Out = false;
+                    batsman1 = India[wickets_Lost + 1];
+                    currentBatsman = India[wickets_Lost + 1];
+                    On_strike_Batsman_out = false;
+                    //Console.WriteLine("1E HELLO THERE!");
+                }
+                else if (batsman_1_Out == true && wickets_Lost < 10 && last_Ball_Wicket == true)
+                {
+                    //Console.WriteLine("Batsman 1 OUT -- last ball");
+                    batsman_1_Out = false;
+                    batsman1 = India[wickets_Lost + 1];
+                    currentBatsman = batsman2;
+                    On_strike_Batsman_out = false;
+                    //Console.WriteLine("1E HELLO THERE!");
+                }
+                else if (batsman_2_Out == true && wickets_Lost < 10 && last_Ball_Wicket == false)
+                {
+                    //Console.WriteLine("Batsman 2 OUT");
+                    batsman_2_Out = false;
+                    batsman2 = India[wickets_Lost + 1];
+                    currentBatsman = India[wickets_Lost + 1];
+                    On_strike_Batsman_out = false;
+                    //Console.WriteLine("2E HELLO THERE!");
+                }
+                else if (batsman_2_Out == true && wickets_Lost < 10 && last_Ball_Wicket == true)
+                {
+                   //Console.WriteLine("Batsman 2 OUT -- last ball");
+                    batsman_2_Out = false;
+                    batsman2 = India[wickets_Lost + 1];
+                    currentBatsman = batsman1;
+                    On_strike_Batsman_out = false;
+                    //Console.WriteLine("2E HELLO THERE!");
+                }
+                if(overs_total < 20 && over_COMPLETE == true) {
+                    over_COMPLETE = false;
+                }
+                if(overs_total == 20) {
+                    Innings_Complete = true;
+                }
+                last_Ball_Wicket = false;
+                if (wickets_Lost == 10 || Innings_Complete == true)
+                {
+                    Innings_Complete = true;
+                    if(batsman_1_Out == false) {
+                        if(batsman1 == "Virat Kohli") {
+                                Batting_Scorecard_1_Names[0] = "Virat Kohli *";
+                                Virat_Kohli_Score = batsman_1_Score;
+                                Virat_Kohli_DelPlayed = balls1;
+                            }
+                            else if(batsman1 == "Rohit Sharma") {
+                                Batting_Scorecard_1_Names[1] = "Rohit Sharma *";
+                                Rohit_Sharma_Score = batsman_1_Score;
+                                Rohit_Sharma_DelPlayed = balls1;
+                            }
+                            else if(batsman1 == "Rahul Dravid") {
+                                Batting_Scorecard_1_Names[3] = "Rahul Dravid *";
+                                Rahul_Dravid_Score = batsman_1_Score;
+                                Rahul_Dravid_DelPlayed = balls1;
+                            }
+                            else if(batsman1 == "Sachin Tendulkar") {
+                                Batting_Scorecard_1_Names[4] = "Sachin Tendulkar *";
+                                Sachin_Tend_Score = batsman_1_Score;
+                                Sachin_Tend_DelPlayed = balls1;
+                            }
+                            else if(batsman1 == "Saurav Ganguly") {
+                                Batting_Scorecard_1_Names[2] = "Saurav Ganguly *";
+                                Saurav_Ganguly_Score = batsman_1_Score;
+                                Saurav_Ganguly_DelPlayed = balls1;
+                            }
+                            else if(batsman1 == "VVS Laxman") {
+                                Batting_Scorecard_1_Names[5] = "VVS Laxman *";
+                                VVS_Laxman_Score = batsman_1_Score;
+                                VVS_Laxman_DelPlayed = balls1;
+                            }
+                            else if(batsman1 == "MS Dhoni") {
+                                Batting_Scorecard_1_Names[6] = "MS Dhoni *";
+                                MS_Dhoni_Score = batsman_1_Score;
+                                MS_Dhoni_DelPlayed = balls1;
+                            }
+                            else if(batsman1 == "Irfan Pathan") {
+                                Batting_Scorecard_1_Names[7] = "Irfan Pathan *";
+                                Irfan_Pathan_Score = batsman_1_Score;
+                                Irfan_Pathan_DelPlayed = balls1;
+                            }
+                            else if(batsman1 == "Zaheer Khan") {
+                                Batting_Scorecard_1_Names[8] = "Zaheer Khan *";
+                                Zaheer_Khan_Score = batsman_1_Score;
+                                Zaheer_Khan_DelPlayed = balls1;
+                            }
+                            else if(batsman1 == "Ravichandran Ashwin") {
+                                Batting_Scorecard_1_Names[9] = "Ravichandran Ashwin *";
+                                Ravichandran_Ashwin_Score = batsman_1_Score;
+                                Ravichandran_Ashwin_DelPlayed = balls1;
+                            }
+                            else if(batsman1 == "Ishant Sharma") {
+                                Batting_Scorecard_1_Names[10] = "Ishant Sharma *";
+                                Ishant_Sharma_Score = batsman_1_Score;
+                                Ishant_Sharma_DelPlayed = balls1;
+                            }
+                    }
+                    if(batsman_2_Out == false) {
+                        if(batsman2 == "Virat Kohli") {
+                                Batting_Scorecard_1_Names[0] = "Virat Kohli *";
+                                Virat_Kohli_Score = batsman_2_Score;
+                                Virat_Kohli_DelPlayed = balls2;
+                            }
+                            else if(batsman2 == "Rohit Sharma") {
+                                Batting_Scorecard_1_Names[1] = "Rohit Sharma *";
+                                Rohit_Sharma_Score = batsman_2_Score;
+                                Rohit_Sharma_DelPlayed = balls2;
+                            }
+                            else if(batsman2 == "Rahul Dravid") {
+                                Batting_Scorecard_1_Names[3] = "Rahul Dravid *";
+                                Rahul_Dravid_Score = batsman_2_Score;
+                                Rahul_Dravid_DelPlayed = balls2;
+                            }
+                            else if(batsman2 == "Sachin Tendulkar") {
+                                Batting_Scorecard_1_Names[4] = "Sachin Tendulkar *";
+                                Sachin_Tend_Score = batsman_2_Score;
+                                Sachin_Tend_DelPlayed = balls2;
+                            }
+                            else if(batsman2 == "Saurav Ganguly") {
+                                Batting_Scorecard_1_Names[2] = "Saurav Ganguly *";
+                                Saurav_Ganguly_Score = batsman_2_Score;
+                                Saurav_Ganguly_DelPlayed = balls2;
+                            }
+                            else if(batsman2 == "VVS Laxman") {
+                                Batting_Scorecard_1_Names[5] = "VVS Laxman *";
+                                VVS_Laxman_Score = batsman_2_Score;
+                                VVS_Laxman_DelPlayed = balls2;
+                            }
+                            else if(batsman2 == "MS Dhoni") {
+                                Batting_Scorecard_1_Names[6] = "MS Dhoni * : ";
+                                MS_Dhoni_Score = batsman_2_Score;
+                                MS_Dhoni_DelPlayed = balls2;
+                            }
+                            else if(batsman2 == "Irfan Pathan") {
+                                Batting_Scorecard_1_Names[7] = "Irfan Pathan *";
+                                Irfan_Pathan_Score = batsman_2_Score;
+                                Irfan_Pathan_DelPlayed = balls2;
+                            }
+                            else if(batsman2 == "Zaheer Khan") {
+                                Batting_Scorecard_1_Names[8] = "Zaheer Khan *";
+                                Zaheer_Khan_Score = batsman_2_Score;
+                                Zaheer_Khan_DelPlayed = balls2;
+                            }
+                            else if(batsman2 == "Ravichandran Ashwin") {
+                                Batting_Scorecard_1_Names[9] = "Ravichandran Ashwin *";
+                                Ravichandran_Ashwin_Score = batsman_2_Score;
+                                Ravichandran_Ashwin_DelPlayed = balls2;
+                            }
+                            else if(batsman2 == "Ishant Sharma") {
+                                Batting_Scorecard_1_Names[10] = "Ishant Sharma *";
+                                Ishant_Sharma_Score = batsman_2_Score;
+                                Ishant_Sharma_DelPlayed = balls2;
+                            }
+                    }
+                }
+            }
+
+            Batting_Scorecard_1_Runs.Add(Virat_Kohli_Score);
+            Batting_Scorecard_1_Runs.Add(Rohit_Sharma_Score);
+            Batting_Scorecard_1_Runs.Add(Saurav_Ganguly_Score);
+            Batting_Scorecard_1_Runs.Add(Rahul_Dravid_Score);
+            Batting_Scorecard_1_Runs.Add(Sachin_Tend_Score);
+            Batting_Scorecard_1_Runs.Add(VVS_Laxman_Score);
+            Batting_Scorecard_1_Runs.Add(MS_Dhoni_Score);
+            Batting_Scorecard_1_Runs.Add(Irfan_Pathan_Score);
+            Batting_Scorecard_1_Runs.Add(Zaheer_Khan_Score);
+            Batting_Scorecard_1_Runs.Add(Ravichandran_Ashwin_Score);
+            Batting_Scorecard_1_Runs.Add(Ishant_Sharma_Score);
+
+            Batting_Scorecard_1_Balls.Add(Virat_Kohli_DelPlayed);
+            Batting_Scorecard_1_Balls.Add(Rohit_Sharma_DelPlayed);
+            Batting_Scorecard_1_Balls.Add(Saurav_Ganguly_DelPlayed);
+            Batting_Scorecard_1_Balls.Add(Rahul_Dravid_DelPlayed);
+            Batting_Scorecard_1_Balls.Add(Sachin_Tend_DelPlayed);
+            Batting_Scorecard_1_Balls.Add(VVS_Laxman_DelPlayed);
+            Batting_Scorecard_1_Balls.Add(MS_Dhoni_DelPlayed);
+            Batting_Scorecard_1_Balls.Add(Irfan_Pathan_DelPlayed);
+            Batting_Scorecard_1_Balls.Add(Zaheer_Khan_DelPlayed);
+            Batting_Scorecard_1_Balls.Add(Ravichandran_Ashwin_DelPlayed);
+            Batting_Scorecard_1_Balls.Add(Ishant_Sharma_DelPlayed);
+
+            Console.WriteLine("       ");
+            Console.WriteLine("Batting Scorecard: ");
+            Console.WriteLine("       ");
+
+            for(int i = 0; i < 11; i++) {
+                 Console.WriteLine(Batting_Scorecard_1_Names[i] + " : " + Batting_Scorecard_1_Runs[i]
+                 + " (" + Batting_Scorecard_1_Balls[i] + ") ");
+            }
+
+            int balls = deliveries_total % 6;
+            int overs = deliveries_total / 6;
+            Console.WriteLine("       ");
+            Console.WriteLine(team1 + " : " + innings_total + " / " + wickets_Lost 
+            + " in " + overs + "." + balls + " overs.");
+
+            first_Innings_total = innings_total;
+        }
+        public static void AustraliaBats()
+        {
+            Console.WriteLine("      ");
+            Console.WriteLine("_________________________");
+            Console.WriteLine("_________________________");
+            Console.WriteLine("      ");
+            Console.WriteLine("Australia will bat, and India will bowl");
+            Console.WriteLine("      ");
+            Console.WriteLine("Australia need " + (first_Innings_total + 1) + " runs to win");
+            Console.WriteLine("      ");
+            
+            Batting_Scorecard_2_Names = Australia;
+
+            bowler1 = India[10];
+            bowler2 = India[9];
+            bowler3 = India[8];
+            bowler4 = India[7];
+            bowler5 = India[6];
+
+            currentBowler = bowler1;
+            
+            Random int1 = new Random();
+            del1 = int1.Next(6,10);
+
+            Random int2 = new Random();
+            del2 = int1.Next(6,10);
+
+            Random int3 = new Random();
+            del3 = int1.Next(6,10);
+
+            Random int4 = new Random();
+            del4 = int1.Next(6,15);
+
+            Random int5 = new Random();
+            del5 = int1.Next(6,20);
+
+            batsman1 = Australia[0];
+            batsman2 = Australia[1];
+            currentBatsman = batsman1;
+            Innings_Complete = false;
+            On_strike_Batsman_out = false;
+            
+            while (Innings_Complete == false)
+            {
+                while (On_strike_Batsman_out == false)
+                {
+                    if(currentBatsman == Australia[0] || currentBatsman == Australia[1] || currentBatsman == Australia[2]) {
+                        //Console.WriteLine("TOP ORDER!");
+                        Random hit1 = new Random();
+                        int shot1 = hit1.Next(0, Top_PossibleShots_LOW.Count);
+                        shot = Top_PossibleShots_LOW[shot1];
+                    }
+
+                    if(currentBatsman == Australia[3] || currentBatsman == Australia[4] || currentBatsman == Australia[5] || currentBatsman == Australia[6]) {
+                        //Console.WriteLine("MIDDLE ORDER!");
+                        Random hit1 = new Random();
+                        int shot1 = hit1.Next(0, Middle_PossibleShots_LOW.Count);
+                        shot = Middle_PossibleShots_LOW[shot1];
+                    }
+                    
+                    if(currentBatsman == Australia[7] || currentBatsman == Australia[8] || currentBatsman == Australia[9] || currentBatsman == Australia[10]) {
+                        //Console.WriteLine("LOWER ORDER!");
+                        Random hit1 = new Random();
+                        int shot1 = hit1.Next(0, Bottom_PossibleShots_LOW.Count);
+                        shot = Bottom_PossibleShots_LOW[shot1];
+                    }
+
+                    if(bowler1_balls < 6 && bowler1_OVER_DONE == false) {
+                        Console.WriteLine("BOWLER 1!!!");
+                        currentBowler = bowler1;
+                    }
+                    else if(bowler2_balls < 6 && bowler2_OVER_DONE == false) {
+                        Console.WriteLine("BOWLER 2!!!");
+                        currentBowler = bowler2;
+                    }
+                    else if(bowler3_balls < 6 && bowler3_OVER_DONE == false) {
+                        Console.WriteLine("BOWLER 3!!!");
+                        currentBowler = bowler3;
+                    }
+                    else if(bowler4_balls < 6 && bowler4_OVER_DONE == false) {
+                        Console.WriteLine("BOWLER 4!!!");
+                        currentBowler = bowler4;
+                    }
+                    else if(bowler5_balls < 6 && bowler5_OVER_DONE == false) {
+                        Console.WriteLine("BOWLER 5!!!");
+                        currentBowler = bowler5;
+                    }
+                    
+
+                    if(currentBowler == bowler1) {
+                        Random ball1 = new Random();
+                        int delivery1 = ball1.Next(0, del1);
+                        delivery = delivery1;
+                    }
+                    else if(currentBowler == bowler2) {
+                        Random ball1 = new Random();
+                        int delivery1 = ball1.Next(0, del2);
+                        delivery = delivery1;
+                    }
+                    else if(currentBowler == bowler3) {
+                        Random ball1 = new Random();
+                        int delivery1 = ball1.Next(0, del3);
+                        delivery = delivery1;
+                    }
+                    else if(currentBowler == bowler4) {
+                        Random ball1 = new Random();
+                        int delivery1 = ball1.Next(0, del4);
+                        delivery = delivery1;
+                    }
+                    else if(currentBowler == bowler5) {
+                        //Console.WriteLine("BOWLER 5!!!");
+                        Random ball1 = new Random();
+                        int delivery1 = ball1.Next(0, del5);
+                        delivery = delivery1;
+                    }
+                    
+
+                    if (!(shot == delivery))
+                    {
+                        if (shot == 1 || shot == 3)
+                        {
+                            if (currentBatsman == batsman1)
+                            {
+                                Console.WriteLine(currentBatsman + " scored " + shot);
+                                batsman_1_Score += shot;
+                                balls1++;
+                                currentBatsman = batsman2;
+                                swap = true;
+
+                            }
+                            else if (currentBatsman == batsman2 && swap == false)
+                            {
+                                Console.WriteLine(currentBatsman + " scored " + shot);
+                                batsman_2_Score += shot;
+                                balls2++;
+                                currentBatsman = batsman1;
+                            }
+                            swap = false;
+                        }
+                        else
+                        {
+                            if (currentBatsman == batsman1)
+                            {
+                                Console.WriteLine(currentBatsman + " scored " + shot);
+                                batsman_1_Score += shot;
+                                balls1++;
+                            }
+                            if (currentBatsman == batsman2)
+                            {
+                                Console.WriteLine(currentBatsman + " scored " + shot);
+                                batsman_2_Score += shot;
+                                balls2++;
+                            }
+                        }
+                        innings_total += shot;
+                        deliveries_total++;
+                    }
+                    else if (shot == delivery)
+                    {
+                        deliveries_total++;
+                        if (currentBatsman == batsman1)
+                        {
+                            balls1++;
+                            //Batting_Scorecard_1_Names.Add(currentBatsman);
+                            //Batting_Scorecard_1_Runs.Add(batsman_1_Score);
+                            //Batting_Scorecard_1_Balls.Add(balls1);
+                            if(currentBatsman == "David Warner") {
+                                David_Warner_score = batsman_1_Score;
+                                David_Warner_DelPlayed = balls1;
+                            }
+                            else if(currentBatsman == "Steven Smith") {
+                                Steven_Smith_score = batsman_1_Score;
+                                Steven_Smith_DelPlayed = balls1;
+                            }
+                            else if(currentBatsman == "Michael Clarke") {
+                                Michael_Clarke_score = batsman_1_Score;
+                                Michael_Clarke_DelPlayed = balls1;
+                            }
+                            else if(currentBatsman == "Shaun Marsh") {
+                                Shaun_Marsh_score = batsman_1_Score;
+                                Shaun_Marsh_DelPlayed = balls1;
+                            }
+                            else if(currentBatsman == "Ricky Ponting") {
+                                Ricky_Ponting_score = batsman_1_Score;
+                                Ricky_Ponting_DelPlayed = balls1;
+                            }
+                            else if(currentBatsman == "Adam Gilchrist") {
+                                Adam_Gilchrist_score = batsman_1_Score;
+                                Adam_Gilchrist_DelPlayed = balls1;
+                            }
+                            else if(currentBatsman == "Glen Maxwell") {
+                                Glen_Maxwell_score = batsman_1_Score;
+                                Glen_Maxwell_DelPlayed = balls1;
+                            }
+                            else if(currentBatsman == "Mitchell Starc") {
+                                Mitchell_Starc_score = batsman_1_Score;
+                                Mitchell_Starc_DelPlayed = balls1;
+                            }
+                            else if(currentBatsman == "Josh Hazelwood") {
+                                Josh_Hazelwood_score = batsman_1_Score;
+                                Josh_Hazelwood_DelPlayed = balls1;
+                            }
+                            else if(currentBatsman == "Nathan Lyon") {
+                                Nathan_Lyon_score = batsman_1_Score;
+                                Nathan_Lyon_DelPlayed = balls1;
+                            }
+                            else if(currentBatsman == "James Pattinson") {
+                                James_Pattinson_score = batsman_1_Score;
+                                James_Pattinson_DelPlayed = balls1;
+                            }
+                            wickets_Lost++;
+                            
+                            Console.WriteLine(batsman1 + " OUT!");
+                            /*
+                            Console.WriteLine("--------");
+                            Console.WriteLine(currentBatsman + " is out on " + batsman_1_Score + " (" + balls1 + ")");
+                            Console.WriteLine(batsman2 + " is not out on " + batsman_2_Score + " (" + balls2 + ")");
+                            Console.WriteLine(team1 + " is " + innings_total + " / " + wickets_Lost + " in " + deliveries_total + " deliveries" );
+                            Console.WriteLine("--------");
+                            */
+                            batsman_1_Out = true;
+                            if(wickets_Lost < 10) {
+                                balls1 = 0;
+                                batsman_1_Score = 0;
+                            }
+                            
+                            if(deliveries_total % 6 == 0) {
+                                last_Ball_Wicket = true;
+                            }
+                        }
+                        else if (currentBatsman == batsman2)
+                        {
+                            balls2++;
+                            //Batting_Scorecard_1_Names.Add(currentBatsman);
+                            //Batting_Scorecard_1_Runs.Add(batsman_2_Score);
+                            //Batting_Scorecard_1_Balls.Add(balls2);
+                            if(currentBatsman == "David Warner") {
+                                David_Warner_score = batsman_2_Score;
+                                David_Warner_DelPlayed = balls2;
+                            }
+                            else if(currentBatsman == "Steven Smith") {
+                                Steven_Smith_score = batsman_2_Score;
+                                Steven_Smith_DelPlayed = balls2;
+                            }
+                            else if(currentBatsman == "Michael Clarke") {
+                                Michael_Clarke_score = batsman_2_Score;
+                                Michael_Clarke_DelPlayed = balls2;
+                            }
+                            else if(currentBatsman == "Shaun Marsh") {
+                                Shaun_Marsh_score = batsman_2_Score;
+                                Shaun_Marsh_DelPlayed = balls2;
+                            }
+                            else if(currentBatsman == "Ricky Ponting") {
+                                Ricky_Ponting_score = batsman_2_Score;
+                                Ricky_Ponting_DelPlayed = balls2;
+                            }
+                            else if(currentBatsman == "Adam Gilchrist") {
+                                Adam_Gilchrist_score = batsman_2_Score;
+                                Adam_Gilchrist_DelPlayed = balls2;
+                            }
+                            else if(currentBatsman == "Glen Maxwell") {
+                                Glen_Maxwell_score = batsman_2_Score;
+                                Glen_Maxwell_DelPlayed = balls2;
+                            }
+                            else if(currentBatsman == "Mitchell Starc") {
+                                Mitchell_Starc_score = batsman_2_Score;
+                                Mitchell_Starc_DelPlayed = balls2;
+                            }
+                            else if(currentBatsman == "Josh Hazelwood") {
+                                Josh_Hazelwood_score = batsman_2_Score;
+                                Josh_Hazelwood_DelPlayed = balls2;
+                            }
+                            else if(currentBatsman == "Nathan Lyon") {
+                                Nathan_Lyon_score = batsman_2_Score;
+                                Nathan_Lyon_DelPlayed = balls2;
+                            }
+                            else if(currentBatsman == "James Pattinson") {
+                                James_Pattinson_score = batsman_2_Score;
+                                James_Pattinson_DelPlayed = balls2;
+                            }
+                            wickets_Lost++;
+                            
+                            Console.WriteLine(batsman2 + " OUT!");
+                            /*
+                            Console.WriteLine("--------");
+                            Console.WriteLine(currentBatsman + " is out on " + batsman_2_Score + " (" + balls2 + ")");
+                            Console.WriteLine(batsman1 + " is not out on " + batsman_1_Score + " (" + balls1 + ")");
+                            Console.WriteLine(team1 + " is " + innings_total + " / " + wickets_Lost + " in " + deliveries_total + " deliveries");
+                            Console.WriteLine("--------");
+                            */
+                            batsman_2_Out = true;
+                            if(wickets_Lost < 10) {
+                                balls2 = 0;
+                                batsman_2_Score = 0;
+                            }
+                            if(deliveries_total % 6 == 0) {
+                                last_Ball_Wicket = true;
+                            }
+                        }
+
+                        On_strike_Batsman_out = true;
+                    }
+
+                    if(deliveries_total % 6 == 0) {
+
+                        int balls3 = deliveries_total % 6;
+                        int overs3 = deliveries_total / 6;
+                        Console.WriteLine("       ");
+                        Console.WriteLine(team2 + " : " + innings_total + " / " + wickets_Lost 
+                        + " in " + overs3 + "." + balls3 + " overs.");
+                        Console.WriteLine("       ");
+
+                        if(overs3 == 20) {
+                            overs_total = 20;
+                        }
+                        
+                        bool keepGoing = false;
+                        if(currentBatsman == batsman1) {
+                            currentBatsman = batsman2;
+                            keepGoing = true; 
+                        }
+                        else if(currentBatsman == batsman2 && keepGoing == false) {
+                            currentBatsman = batsman1;
+                        }
+                        keepGoing = false;
+                    }
+                    
+                    if(currentBowler == bowler1) {
+                        bowler1_balls++;
+                        if(bowler1_balls == 6) {
+                            bowler1_OVER_DONE = true;
+                            bowler1_overs++;
+                            overs_total++;
+                        }
+                    }
+                    else if(currentBowler == bowler2) {
+                        bowler2_balls++;
+                        if(bowler2_balls == 6) {
+                            bowler2_OVER_DONE = true;
+                            bowler2_overs++;
+                            overs_total++;
+                        }
+                    }
+                    else if(currentBowler == bowler3) {
+                        bowler3_balls++;
+                        if(bowler3_balls == 6) {
+                            bowler3_OVER_DONE = true;
+                            bowler3_overs++;
+                            overs_total++;
+                        }
+                    }
+                    else if(currentBowler == bowler4) {
+                        bowler4_balls++;
+                        if(bowler4_balls == 6) {
+                            bowler4_OVER_DONE = true;
+                            bowler4_overs++;
+                            overs_total++;
+                        }
+                    }
+                    else if(currentBowler == bowler5) {
+                        bowler5_balls++;
+                        if(bowler5_balls == 6) {
+                            bowler5_OVER_DONE = true;
+                            bowler5_overs++;
+                            overs_total++;
+                        }
+                    }
+
+                    if(innings_total > first_Innings_total || overs_total == 20) {
+                        Innings_Complete = true;
+                        On_strike_Batsman_out = true;
+                    }
+                }
+                if (batsman_1_Out == true && wickets_Lost < 10 && last_Ball_Wicket == false)
+                {
+                    //Console.WriteLine("1 HELLO THERE!");
+                    batsman_1_Out = false;
+                    batsman1 = Australia[wickets_Lost + 1];
+                    currentBatsman = Australia[wickets_Lost + 1];
+                    On_strike_Batsman_out = false;
+                    //Console.WriteLine("1E HELLO THERE!");
+                }
+                else if (batsman_1_Out == true && wickets_Lost < 10 && last_Ball_Wicket == true)
+                {
+                    //Console.WriteLine("1 HELLO THERE!");
+                    batsman_1_Out = false;
+                    batsman1 = Australia[wickets_Lost + 1];
+                    currentBatsman = batsman2;
+                    On_strike_Batsman_out = false;
+                    //Console.WriteLine("1E HELLO THERE!");
+                }
+                else if (batsman_2_Out == true && wickets_Lost < 10 && last_Ball_Wicket == false)
+                {
+                    //Console.WriteLine("2 HELLO THERE!");
+                    batsman_2_Out = false;
+                    batsman2 = Australia[wickets_Lost + 1];
+                    currentBatsman = Australia[wickets_Lost + 1];
+                    On_strike_Batsman_out = false;
+                    //Console.WriteLine("2E HELLO THERE!");
+                }
+                else if (batsman_2_Out == true && wickets_Lost < 10 && last_Ball_Wicket == true)
+                {
+                    //Console.WriteLine("2 HELLO THERE!");
+                    batsman_2_Out = false;
+                    batsman2 = Australia[wickets_Lost + 1];
+                    currentBatsman = batsman1;
+                    On_strike_Batsman_out = false;
+                    //Console.WriteLine("2E HELLO THERE!");
+                }
+                last_Ball_Wicket = false;
+                if (wickets_Lost == 10 || Innings_Complete == true)
+                {
+                    Innings_Complete = true;
+                    if(batsman_1_Out == false) {
+                        if(batsman1 == "Steven Smith") {
+                                Batting_Scorecard_2_Names[1] = "Steven Smith *";
+                                Steven_Smith_score = batsman_1_Score;
+                                Steven_Smith_DelPlayed = balls1;
+                            }
+                            else if(batsman1 == "David Warner") {
+                                Batting_Scorecard_2_Names[0] = "David Warner *";
+                                David_Warner_score = batsman_1_Score;
+                                David_Warner_DelPlayed = balls1;
+                            }
+                            else if(batsman1 == "Michael Clarke") {
+                                Batting_Scorecard_2_Names[2] = "Michael Clarke *";
+                                Michael_Clarke_score = batsman_1_Score;
+                                Michael_Clarke_DelPlayed = balls1;
+                            }
+                            else if(batsman1 == "Shaun Marsh") {
+                                Batting_Scorecard_2_Names[3] = "Shaun Marsh *";
+                                Shaun_Marsh_score = batsman_1_Score;
+                                Shaun_Marsh_DelPlayed = balls1;
+                            }
+                            else if(batsman1 == "Ricky Ponting") {
+                                Batting_Scorecard_2_Names[4] = "Ricky Ponting *";
+                                Ricky_Ponting_score = batsman_1_Score;
+                                Ricky_Ponting_DelPlayed = balls1;
+                            }
+                            else if(batsman1 == "Adam Gilchrist") {
+                                Batting_Scorecard_2_Names[5] = "Adam Gilchrist *";
+                                Adam_Gilchrist_score = batsman_1_Score;
+                                Adam_Gilchrist_DelPlayed = balls1;
+                            }
+                            else if(batsman1 == "Glen Maxwell") {
+                                Batting_Scorecard_2_Names[6] = "Glen Maxwell *";
+                                Glen_Maxwell_score = batsman_1_Score;
+                                Glen_Maxwell_DelPlayed = balls1;
+                            }
+                            else if(batsman1 == "Mitchell Starc") {
+                                Batting_Scorecard_2_Names[7] = "Mitchell Starc *";
+                                Mitchell_Starc_score = batsman_1_Score;
+                                Mitchell_Starc_DelPlayed = balls1;
+                            }
+                            else if(batsman1 == "Josh Hazelwood") {
+                                Batting_Scorecard_2_Names[8] = "Josh Hazelwood *";
+                                Josh_Hazelwood_score = batsman_1_Score;
+                                Josh_Hazelwood_DelPlayed = balls1;
+                            }
+                            else if(batsman1 == "Nathan Lyon") {
+                                Batting_Scorecard_2_Names[9] = "Nathan Lyon *";
+                                Nathan_Lyon_score = batsman_1_Score;
+                                Nathan_Lyon_DelPlayed = balls1;
+                            }
+                            else if(batsman1 == "James Pattinson") {
+                                Batting_Scorecard_2_Names[10] = "James Pattinson *";
+                                James_Pattinson_score = batsman_1_Score;
+                                James_Pattinson_DelPlayed = balls1;
+                            }
+                    }
+                    if(batsman_2_Out == false) {
+                        if(batsman2 == "Steven Smith") {
+                                Batting_Scorecard_2_Names[1] = "Steven Smith *";
+                                Steven_Smith_score = batsman_2_Score;
+                                Steven_Smith_DelPlayed = balls2;
+                            }
+                            else if(batsman2 == "David Warner") {
+                                Batting_Scorecard_2_Names[0] = "David Warner *";
+                                David_Warner_score = batsman_2_Score;
+                                David_Warner_DelPlayed = balls2;
+                            }
+                            else if(batsman2 == "Michael Clarke") {
+                                Batting_Scorecard_2_Names[2] = "Michael Clarke *";
+                                Michael_Clarke_score = batsman_2_Score;
+                                Michael_Clarke_DelPlayed = balls2;
+                            }
+                            else if(batsman2 == "Shaun Marsh") {
+                                Batting_Scorecard_2_Names[3] = "Shaun Marsh *";
+                                Shaun_Marsh_score = batsman_2_Score;
+                                Shaun_Marsh_DelPlayed = balls2;
+                            }
+                            else if(batsman2 == "Ricky Ponting") {
+                                Batting_Scorecard_2_Names[4] = "Ricky Ponting *";
+                                Ricky_Ponting_score = batsman_2_Score;
+                                Ricky_Ponting_DelPlayed = balls2;
+                            }
+                            else if(batsman2 == "Adam Gilchrist") {
+                                Batting_Scorecard_2_Names[5] = "Adam Gilchrist *";
+                                Adam_Gilchrist_score = batsman_2_Score;
+                                Adam_Gilchrist_DelPlayed = balls2;
+                            }
+                            else if(batsman2 == "Glen Maxwell") {
+                                Batting_Scorecard_2_Names[6] = "Glen Maxwell *";
+                                Glen_Maxwell_score = batsman_2_Score;
+                                Glen_Maxwell_DelPlayed = balls2;
+                            }
+                            else if(batsman2 == "Mitchell Starc") {
+                                Batting_Scorecard_2_Names[7] = "Mitchell Starc *";
+                                Mitchell_Starc_score = batsman_2_Score;
+                                Mitchell_Starc_DelPlayed = balls2;
+                            }
+                            else if(batsman2 == "Josh Hazelwood") {
+                                Batting_Scorecard_2_Names[8] = "Josh Hazelwood *";
+                                Josh_Hazelwood_score = batsman_2_Score;
+                                Josh_Hazelwood_DelPlayed = balls2;
+                            }
+                            else if(batsman2 == "Nathan Lyon") {
+                                Batting_Scorecard_2_Names[9] = "Nathan Lyon *";
+                                Nathan_Lyon_score = batsman_2_Score;
+                                Nathan_Lyon_DelPlayed = balls2;
+                            }
+                            else if(batsman2 == "James Pattinson") {
+                                Batting_Scorecard_2_Names[10] = "James Pattinson *";
+                                James_Pattinson_score = batsman_2_Score;
+                                James_Pattinson_DelPlayed = balls2;
+                            }
+                    }
+                }
+            }
+
+            Batting_Scorecard_2_Runs.Add(David_Warner_score);
+            Batting_Scorecard_2_Runs.Add(Steven_Smith_score);
+            Batting_Scorecard_2_Runs.Add(Michael_Clarke_score);
+            Batting_Scorecard_2_Runs.Add(Shaun_Marsh_score);
+            Batting_Scorecard_2_Runs.Add(Ricky_Ponting_score);
+            Batting_Scorecard_2_Runs.Add(Adam_Gilchrist_score);
+            Batting_Scorecard_2_Runs.Add(Glen_Maxwell_score);
+            Batting_Scorecard_2_Runs.Add(Mitchell_Starc_score);
+            Batting_Scorecard_2_Runs.Add(Josh_Hazelwood_score);
+            Batting_Scorecard_2_Runs.Add(Nathan_Lyon_score);
+            Batting_Scorecard_2_Runs.Add(James_Pattinson_score);
+
+            Batting_Scorecard_2_Balls.Add(David_Warner_DelPlayed);
+            Batting_Scorecard_2_Balls.Add(Steven_Smith_DelPlayed);
+            Batting_Scorecard_2_Balls.Add(Michael_Clarke_DelPlayed);
+            Batting_Scorecard_2_Balls.Add(Shaun_Marsh_DelPlayed);
+            Batting_Scorecard_2_Balls.Add(Ricky_Ponting_DelPlayed);
+            Batting_Scorecard_2_Balls.Add(Adam_Gilchrist_DelPlayed);
+            Batting_Scorecard_2_Balls.Add(Glen_Maxwell_DelPlayed);
+            Batting_Scorecard_2_Balls.Add(Mitchell_Starc_DelPlayed);
+            Batting_Scorecard_2_Balls.Add(Josh_Hazelwood_DelPlayed);
+            Batting_Scorecard_2_Balls.Add(Nathan_Lyon_DelPlayed);
+            Batting_Scorecard_2_Balls.Add(James_Pattinson_DelPlayed);
+
+            Console.WriteLine("       ");
+            Console.WriteLine("Batting Scorecard: ");
+            Console.WriteLine("       ");
+
+            for(int i = 0; i < 11; i++) {
+                 Console.WriteLine(Batting_Scorecard_2_Names[i] + " " + Batting_Scorecard_2_Runs[i]
+                 + " (" + Batting_Scorecard_2_Balls[i] + ") ");
+            }
+
+            int balls = deliveries_total % 6;
+            int overs = deliveries_total / 6;
+            Console.WriteLine("       ");
+            Console.WriteLine(team2 + " : " + innings_total + " / " + wickets_Lost 
+            + " in " + overs + "." + balls + " overs.");
+
+            if(first_Innings_total < innings_total) {
+                Console.WriteLine("    ");
+                Console.WriteLine(team2 + " win by " + (10 - wickets_Lost) + " wickets");
+            }
+
+            else if(wickets_Lost == 10 || innings_total < first_Innings_total) {
+                Console.WriteLine("    ");
+                Console.WriteLine(team1 + " won by " + (first_Innings_total - innings_total) + " runs.");
+                Console.WriteLine("    ");
+            }
+        }
+        
+    }
+}
